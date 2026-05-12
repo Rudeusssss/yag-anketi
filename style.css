@@ -1,0 +1,220 @@
+:root {
+    --primary: #2563eb;
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --text: #334155;
+    --border: #e2e8f0;
+    --bg-card: #ffffff;
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+}
+
+/* Header */
+.main-header {
+    text-align: center;
+    padding: 40px 0 20px;
+}
+
+.main-header h1 {
+    font-size: 1.4rem;
+    color: var(--dark);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.main-header p {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-top: 8px;
+}
+
+.divider {
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+    margin: 15px auto;
+    border-radius: 2px;
+}
+
+/* Card */
+.survey-card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.form-section { margin-bottom: 30px; }
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: var(--primary);
+    margin-right: 10px;
+    border-radius: 2px;
+}
+
+/* Form Elemanları */
+.input-group { margin-bottom: 18px; }
+
+label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #475569;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    background: #fdfdfd;
+    transition: 0.2s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: #fff;
+}
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+/* AHP Ölçeği */
+.comparison-item {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #f1f5f9;
+}
+
+.comp-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 18px;
+    color: var(--dark);
+}
+
+.ahp-scale {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.side-label { font-size: 0.7rem; font-weight: 700; width: 80px; }
+.side-label:last-child { text-align: right; }
+
+.radio-group { display: flex; gap: 12px; }
+
+input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.scale-labels {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    font-size: 0.65rem;
+    color: #94a3b8;
+    margin-top: 8px;
+}
+
+/* Uyarı ve Buton */
+.info-alert {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    margin-bottom: 25px;
+    border: 1px solid #dbeafe;
+}
+
+.submit-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submit-btn:hover { background: #1e40af; transform: translateY(-2px); }
+
+/* Loader */
+.loader-wrapper {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: 0.5s;
+}
+
+.loader {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.success-msg { text-align: center; padding: 20px 0; }
+.check-icon {
+    font-size: 40px;
+    color: #22c55e;
+    margin-bottom: 15px;
+}
+
+.footer { text-align: center; margin-top: 30px; font-size: 0.75rem; color: #94a3b8; }
+
+@media (max-width: 600px) {
+    .row { grid-template-columns: 1fr; gap: 0; }
+    .radio-group { gap: 8px; }
+    .side-label { font-size: 0.6rem; width: 60px; }
+}
