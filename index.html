@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tesis Yerleşim Planı Analizi | Akademik Araştırma</title>
+    <title>Bitkisel Yağ Tesisleri AHP Analizi</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="loader-wrapper" id="loader">
-        <div class="loader"></div>
-    </div>
+    <div class="loader-wrapper" id="loader"><div class="loader"></div></div>
 
     <div class="container">
         <header class="main-header">
             <h1>Bitkisel Yağ Üretim Tesisleri</h1>
-            <p>Yerleşim Planını Etkileyen Kriterlerin Önceliklendirilmesi (AHP)</p>
+            <p>Yerleşim Planı Kriter Önceliklendirme Anketi (AHP)</p>
             <div class="divider"></div>
         </header>
 
@@ -26,73 +24,70 @@
                 <section class="form-section">
                     <h2 class="section-title">Katılımcı Bilgileri</h2>
                     <div class="input-group">
-                        <label for="name">Ad Soyad / Ünvan</label>
-                        <input type="text" id="name" name="katilimci_adi" placeholder="Örn: Üretim Müdürü" required>
+                        <label>Ad Soyad / Ünvan</label>
+                        <input type="text" name="Katilimci_Bilgisi" placeholder="Örn: Üretim Müdürü" required>
                     </div>
-                    
                     <div class="row">
                         <div class="input-group">
-                            <label for="age">Deneyim Süresi (Yıl)</label>
-                            <input type="number" id="age" name="deneyim_yili" placeholder="Örn: 10" required>
+                            <label>Deneyim Süresi (Yıl)</label>
+                            <input type="number" name="Deneyim_Yili" required>
                         </div>
                         <div class="input-group">
-                            <label for="gender">Cinsiyet</label>
-                            <select id="gender" name="cinsiyet" required>
+                            <label>Cinsiyet</label>
+                            <select name="Cinsiyet" required>
                                 <option value="" disabled selected>Seçiniz</option>
                                 <option value="Erkek">Erkek</option>
-                                <option value="Kadın">Kadın</option>
+                                <option value="Kadin">Kadın</option>
                             </select>
                         </div>
                     </div>
                 </section>
 
                 <div class="info-alert">
-                    <strong>Puanlama Rehberi:</strong> İki kriterden hangisi daha önemliyse o tarafa doğru işaretleyin. 
-                    (1: Eşit, 5: Güçlü, 9: Aşırı Derecede Önemli)
+                    <strong>AHP Puanlama Rehberi:</strong> Hangi kriter daha önemliyse o tarafa doğru işaretleyin. <br>
+                    (1: Eşit, 3: Biraz, 5: Güçlü, 7: Çok Güçlü, 9: Aşırı Derecede Önemli)
                 </div>
 
                 <section class="form-section">
-                    <h2 class="section-title">Ana Kriter Kıyaslamaları</h2>
-                    
-                    <div class="comparison-item">
-                        <p class="comp-text">Maliyet mi? yoksa Verimlilik mi?</p>
-                        <div class="ahp-scale">
-                            <span class="side-label">MALİYET</span>
-                            <div class="radio-group">
-                                <input type="radio" name="maliyet_verimlilik" value="-9" title="Aşırı Önemli" required>
-                                <input type="radio" name="maliyet_verimlilik" value="-5" title="Güçlü Önemli">
-                                <input type="radio" name="maliyet_verimlilik" value="1" title="Eşit" checked>
-                                <input type="radio" name="maliyet_verimlilik" value="5" title="Güçlü Önemli">
-                                <input type="radio" name="maliyet_verimlilik" value="9" title="Aşırı Önemli">
-                            </div>
-                            <span class="side-label">VERİMLİLİK</span>
-                        </div>
-                        <div class="scale-labels">
-                            <span>9</span><span>5</span><span class="active">1</span><span>5</span><span>9</span>
-                        </div>
-                    </div>
-
-                    <div class="comparison-item">
-                        <p class="comp-text">Esneklik mi? yoksa Risk/Güvenlik mi?</p>
-                        <div class="ahp-scale">
-                            <span class="side-label">ESNEKLİK</span>
-                            <div class="radio-group">
-                                <input type="radio" name="esneklik_risk" value="-9" required>
-                                <input type="radio" name="esneklik_risk" value="-5">
-                                <input type="radio" name="esneklik_risk" value="1" checked>
-                                <input type="radio" name="esneklik_risk" value="5">
-                                <input type="radio" name="esneklik_risk" value="9">
-                            </div>
-                            <span class="side-label">RİSK</span>
-                        </div>
-                    </div>
+                    <h2 class="section-title">1. Ana Kriterlerin Karşılaştırılması</h2>
+                    <div id="ana-kriterler-container"></div>
                 </section>
 
                 <section class="form-section">
-                    <h2 class="section-title">Saha Gözlemleri</h2>
+                    <h2 class="section-title">2. Alt Kriterlerin Karşılaştırılması</h2>
+                    
+                    <h3 class="sub-group-title">2.1. Maliyet Alt Kriterleri</h3>
+                    <div id="maliyet-alt-container"></div>
+
+                    <h3 class="sub-group-title">2.2. Verimlilik Alt Kriterleri</h3>
+                    <div id="verimlilik-alt-container"></div>
+
+                    <h3 class="sub-group-title">2.3. Esneklik Alt Kriterleri</h3>
+                    <div id="esneklik-alt-container"></div>
+
+                    <h3 class="sub-group-title">2.4. Risk ve Güvenlik Alt Kriterleri</h3>
+                    <div id="risk-alt-container"></div>
+
+                    <h3 class="sub-group-title">2.5. Alan Kullanımı Alt Kriterleri</h3>
+                    <div id="alan-alt-container"></div>
+
+                    <h3 class="sub-group-title">2.6. Yönetilebilirlik Alt Kriterleri</h3>
+                    <div id="yonetilebilirlik-alt-container"></div>
+                </section>
+
+                <section class="form-section">
+                    <h2 class="section-title">3. Genel Değerlendirme</h2>
                     <div class="input-group">
-                        <label for="comments">Mevcut yerleşim planında gördüğünüz en büyük sorun nedir?</label>
-                        <textarea id="comments" name="yorum" rows="3" placeholder="Görüşlerinizi paylaşın..."></textarea>
+                        <label>Sizce en kritik faktör hangisidir?</label>
+                        <textarea name="En_Kritik_Faktor" rows="2" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Mevcut yerleşimde en büyük sorun nedir?</label>
+                        <textarea name="Mevcut_Sorun" rows="2" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>İyileştirme sonucu en büyük kazanç ne olur?</label>
+                        <textarea name="Beklenen_Kazanc" rows="2" required></textarea>
                     </div>
                 </section>
 
@@ -100,17 +95,100 @@
             </form>
 
             <div id="successMessage" class="success-msg" style="display: none;">
-                <div class="check-icon">✓</div>
+                <div style="font-size: 50px; color: #22c55e;">✓</div>
                 <h3>Teşekkür Ederiz!</h3>
-                <p>Cevaplarınız başarıyla iletildi. Akademik çalışmamıza katkınız için minnettarız.</p>
+                <p>Verileriniz başarıyla kaydedildi. Akademik çalışmamıza katkınız çok değerlidir.</p>
             </div>
         </div>
-
-        <footer class="footer">
-            <p>&copy; 2026 Endüstriyel Tesis Analiz Portalı</p>
-        </footer>
+        <footer class="footer"><p>&copy; 2026 Endüstriyel Tesis Analiz Portalı</p></footer>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const surveyData = {
+            ana: [
+                ["Maliyet", "Verimlilik"], ["Maliyet", "Esneklik"], ["Maliyet", "Risk ve Güvenlik"],
+                ["Maliyet", "Alan Kullanımı"], ["Maliyet", "Yönetilebilirlik"],
+                ["Verimlilik", "Esneklik"], ["Verimlilik", "Risk ve Güvenlik"],
+                ["Verimlilik", "Alan Kullanımı"], ["Verimlilik", "Yönetilebilirlik"],
+                ["Esneklik", "Risk ve Güvenlik"], ["Esneklik", "Alan Kullanımı"],
+                ["Esneklik", "Yönetilebilirlik"], ["Risk ve Güvenlik", "Alan Kullanımı"],
+                ["Risk ve Güvenlik", "Yönetilebilirlik"], ["Alan Kullanımı", "Yönetilebilirlik"]
+            ],
+            maliyet: [["Malzeme Taşıma", "Kurulum Maliyeti"], ["Malzeme Taşıma", "İşletme Maliyeti"], ["Kurulum Maliyeti", "İşletme Maliyeti"]],
+            verimlilik: [["Üretim Hızı", "Bekleme Süreleri"], ["Üretim Hızı", "Kapasite Kullanımı"], ["Bekleme Süreleri", "Kapasite Kullanımı"]],
+            esneklik: [["Ürün Çeşitliliği", "Talep Değişimi"], ["Ürün Çeşitliliği", "Hat Değişim Kolaylığı"], ["Talep Değişimi", "Hat Değişim Kolaylığı"]],
+            risk: [["İş Kazası Riski", "Arıza Etkisi"], ["İş Kazası Riski", "Gıda Güvenliği"], ["Arıza Etkisi", "Gıda Güvenliği"]],
+            alan: [["Alan Verimliliği", "Depolama Kullanımı"], ["Alan Verimliliği", "Genişleme İmkanı"], ["Depolama Kullanımı", "Genişleme İmkanı"]],
+            yonetim: [["Kontrol Kolaylığı", "Koordinasyon"], ["Kontrol Kolaylığı", "Bakım Yönetimi"], ["Koordinasyon", "Bakım Yönetimi"]]
+        };
+
+        function createRows(dataList, containerId, prefix) {
+            const container = document.getElementById(containerId);
+            dataList.forEach(pair => {
+                const row = document.createElement('div');
+                row.className = 'comparison-item';
+                row.innerHTML = `
+                    <p class="comp-text">${pair[0]} vs. ${pair[1]}</p>
+                    <div class="ahp-scale">
+                        <span class="side-label">${pair[0]}</span>
+                        <div class="radio-group">
+                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="-9" required>
+                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="-5">
+                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="1" checked>
+                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="5">
+                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="9">
+                        </div>
+                        <span class="side-label">${pair[1]}</span>
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        createRows(surveyData.ana, 'ana-kriterler-container', 'ANA');
+        createRows(surveyData.maliyet, 'maliyet-alt-container', 'MALİYET');
+        createRows(surveyData.verimlilik, 'verimlilik-alt-container', 'VERIM');
+        createRows(surveyData.esneklik, 'esneklik-alt-container', 'ESNEK');
+        createRows(surveyData.risk, 'risk-alt-container', 'RISK');
+        createRows(surveyData.alan, 'alan-alt-container', 'ALAN');
+        createRows(surveyData.yonetim, 'yonetilebilirlik-alt-container', 'YONETIM');
+
+        // Loader and Form logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 500);
+        });
+
+        document.getElementById('ahpForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerText = 'Gönderiliyor...';
+
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                this.style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+                window.scrollTo(0,0);
+            } else {
+                alert('Hata oluştu, lütfen tekrar deneyin.');
+                btn.disabled = false;
+                btn.innerText = 'Anketi Tamamla ve Gönder';
+            }
+        };
+    </script>
+    <style>
+        /* CSS buraya eklenmiştir, style.css dosyasını da kullanabilirsin */
+        .sub-group-title { font-size: 0.95rem; color: #1e293b; margin: 20px 0 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
+        .radio-group { display: flex; gap: 15px; }
+        .ahp-scale { display: flex; justify-content: space-between; align-items: center; }
+        .side-label { font-size: 0.75rem; font-weight: 600; width: 100px; text-align: center; }
+    </style>
 </body>
 </html>
