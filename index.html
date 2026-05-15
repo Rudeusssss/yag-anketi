@@ -3,78 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AHP Karar Destek Sistemi | Yağ Tesisleri</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>AHP Analiz Portalı</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        :root { --primary: #2563eb; --border: #e2e8f0; --text-main: #1e293b; }
+        :root { --primary: #2563eb; --border: #e2e8f0; --text: #1e293b; }
         
-        .intro-desc {
-            background: #ffffff; padding: 20px; border-radius: 15px;
-            border-left: 6px solid var(--primary); margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .intro-desc h3 { color: var(--primary); margin-bottom: 8px; font-size: 1rem; }
-        .intro-desc p { font-size: 0.85rem; line-height: 1.5; color: #475569; }
-
         .comparison-card {
-            background: #fff; padding: 20px 10px; border-radius: 16px;
-            margin-bottom: 20px; border: 1px solid var(--border); text-align: center;
+            background: #fff; padding: 15px 5px; border-radius: 12px;
+            margin-bottom: 20px; border: 1px solid var(--border);
         }
 
         .comp-title {
-            display: inline-block; font-size: 0.75rem; font-weight: 700;
-            color: var(--primary); background: #eff6ff; padding: 4px 12px;
-            border-radius: 50px; margin-bottom: 20px; text-transform: uppercase;
+            display: block; font-size: 0.7rem; font-weight: 800;
+            color: var(--primary); margin-bottom: 15px; text-align: center;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        /* Mobilde de yan yana kalmasını sağlayan Grid yapısı */
-        .ahp-grid {
-            display: grid;
-            grid-template-columns: 1fr 180px 1fr; /* Mobilde orta alanı daralttık */
-            align-items: center;
-            gap: 5px;
+        /* Ana Taşıyıcı: Esnek ama taşmayan yapı */
+        .ahp-table {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; gap: 2px;
         }
 
-        .side-name { font-weight: 700; font-size: 0.75rem; color: var(--text-main); line-height: 1.2; }
-        .text-right { text-align: right; padding-right: 5px; }
-        .text-left { text-align: left; padding-left: 5px; }
+        /* Yanlardaki Kriter İsimleri */
+        .side-label {
+            width: 22%; font-size: 0.65rem; font-weight: 700;
+            color: var(--text); line-height: 1.1; word-wrap: break-word;
+        }
+        .left-l { text-align: right; padding-right: 4px; }
+        .right-l { text-align: left; padding-left: 4px; }
 
-        .scale-box { display: flex; flex-direction: column; width: 100%; }
+        /* Orta Alan: Sayı ve Butonların Kilitlendiği Yer */
+        .middle-box {
+            width: 56%; display: flex; flex-direction: column; align-items: center;
+        }
 
+        /* Sayı Satırı */
         .num-row {
-            display: grid;
-            grid-template-columns: repeat(9, 1fr);
-            margin-bottom: 8px;
+            display: flex; justify-content: space-between; width: 100%;
+            margin-bottom: 6px; padding: 0 2px;
         }
         .num-row span {
-            font-size: 0.65rem; font-weight: 800; color: #94a3b8;
-            display: flex; justify-content: center;
+            width: 11%; font-size: 0.6rem; font-weight: 800;
+            color: #94a3b8; text-align: center;
         }
-        .num-row span.center-p { color: var(--primary); }
+        .num-row .c-one { color: var(--primary); }
 
+        /* Radyo Buton Satırı */
         .radio-row {
-            display: grid;
-            grid-template-columns: repeat(9, 1fr);
+            display: flex; justify-content: space-between; width: 100%;
+            padding: 0 2px;
         }
         .radio-row input {
-            justify-self: center; width: 16px; height: 16px;
-            cursor: pointer; margin: 0;
+            width: 11%; height: 15px; cursor: pointer; margin: 0;
+            -webkit-appearance: radio; /* Mobil tarayıcı uyumu için */
         }
 
         .sub-header {
-            font-size: 1rem; font-weight: 800; color: var(--text-main);
-            margin: 30px 0 15px; padding-bottom: 5px;
-            border-bottom: 3px solid var(--primary); display: inline-block;
+            font-size: 0.9rem; font-weight: 800; color: var(--text);
+            margin: 25px 0 10px; padding-bottom: 4px;
+            border-bottom: 2px solid var(--primary); display: inline-block;
         }
 
-        /* Mobil Özel Ayarlar */
-        @media (max-width: 600px) {
-            .container { padding: 10px; }
-            .ahp-grid { grid-template-columns: 1fr 160px 1fr; } /* Daha da dar ekranlar için */
-            .side-name { font-size: 0.65rem; }
-            .num-row span { font-size: 0.55rem; }
-            .radio-row input { width: 14px; height: 14px; }
+        /* Masaüstü için hafif genişletme */
+        @media (min-width: 768px) {
+            .side-label { font-size: 0.8rem; }
+            .num-row span { font-size: 0.7rem; }
+            .radio-row input { height: 18px; }
         }
     </style>
 </head>
@@ -84,15 +80,10 @@
 
     <div class="container">
         <header class="main-header">
-            <h1>Tesis Yerleşim Analiz Portalı</h1>
-            <p>Endüstriyel Karar Destek Sistemi</p>
+            <h1>Tesis Analiz Portalı</h1>
+            <p>AHP Karar Destek Sistemi</p>
             <div class="divider"></div>
         </header>
-
-        <div class="intro-desc">
-            <h3>Kullanım Rehberi</h3>
-            <p>Kriter çiftlerini önem derecesine göre kıyaslayınız. Puanlar butonların tam üzerindedir.</p>
-        </div>
 
         <form id="ahpForm" action="https://formspree.io/f/mjgllzgg" method="POST">
             
@@ -103,43 +94,35 @@
                     <div class="input-group"><label>Soyad</label><input type="text" name="Soyad" required></div>
                 </div>
                 <div class="row">
-                    <div class="input-group"><label>Ünvan</label><input type="text" name="Uzman_Unvan" required></div>
-                    <div class="input-group"><label>Tecrübe (Yıl)</label><input type="number" name="Tecrube" required></div>
+                    <div class="input-group"><label>Ünvan</label><input type="text" name="Unvan" required></div>
+                    <div class="input-group"><label>Tecrübe</label><input type="number" name="Yil" required></div>
                 </div>
             </section>
 
             <section class="form-section">
-                <h2 class="section-title">1. Ana Kriterler</h2>
+                <h2 class="section-title">Değerlendirme</h2>
                 <div id="ana-group"></div>
-            </section>
-
-            <section class="form-section">
-                <h2 class="section-title">2. Alt Kriterler</h2>
-                <div class="sub-header">2.1. Maliyet</div> <div id="mal-group"></div>
-                <div class="sub-header">2.2. Verimlilik</div> <div id="ver-group"></div>
-                <div class="sub-header">2.3. Esneklik</div> <div id="esn-group"></div>
-                <div class="sub-header">2.4. Risk & Güvenlik</div> <div id="rsk-group"></div>
-                <div class="sub-header">2.5. Alan Kullanımı</div> <div id="aln-group"></div>
-                <div class="sub-header">2.6. Yönetilebilirlik</div> <div id="ynt-group"></div>
+                <div class="sub-header">Maliyet</div> <div id="mal-group"></div>
+                <div class="sub-header">Verimlilik</div> <div id="ver-group"></div>
+                <div class="sub-header">Esneklik</div> <div id="esn-group"></div>
+                <div class="sub-header">Risk</div> <div id="rsk-group"></div>
+                <div class="sub-header">Alan</div> <div id="aln-group"></div>
+                <div class="sub-header">Yönetim</div> <div id="ynt-group"></div>
             </section>
 
             <button type="submit" class="submit-btn" id="submitBtn">Analizi Tamamla</button>
         </form>
-
-        <div id="successMessage" class="success-msg" style="display: none;">
-            <h2 style="color: #22c55e;">✓ Başarılı</h2>
-        </div>
     </div>
 
     <script>
         const pairs = {
-            ana: [["Maliyet", "Verimlilik"], ["Maliyet", "Esneklik"], ["Maliyet", "Risk/Güv."], ["Maliyet", "Alan"], ["Maliyet", "Yönetim"], ["Verimlilik", "Esneklik"], ["Verimlilik", "Risk/Güv."], ["Verimlilik", "Alan"], ["Verimlilik", "Yönetim"], ["Esneklik", "Risk/Güv."], ["Esneklik", "Alan"], ["Esneklik", "Yönetim"], ["Risk/Güv.", "Alan"], ["Risk/Güv.", "Yönetim"], ["Alan", "Yönetim"]],
+            ana: [["Maliyet", "Verim"], ["Maliyet", "Esneklik"], ["Maliyet", "Risk"], ["Maliyet", "Alan"], ["Maliyet", "Yönetim"], ["Verim", "Esneklik"], ["Verim", "Risk"], ["Verim", "Alan"], ["Verim", "Yönetim"], ["Esneklik", "Risk"], ["Esneklik", "Alan"], ["Esneklik", "Yönetim"], ["Risk", "Alan"], ["Risk", "Yönetim"], ["Alan", "Yönetim"]],
             mal: [["Taşıma", "Kurulum"], ["Taşıma", "İşletme"], ["Kurulum", "İşletme"]],
             ver: [["Hız", "Bekleme"], ["Hız", "Kapasite"], ["Bekleme", "Kapasite"]],
-            esn: [["Çeşitlilik", "Talep"], ["Çeşitlilik", "Hat Değ."], ["Talep", "Hat Değ."]],
-            rsk: [["İş Kazası", "Arıza"], ["İş Kazası", "Gıda Güv."], ["Arıza", "Gıda Güv."]],
-            aln: [["Alan Verimi", "Depo"], ["Alan Verimi", "Genişleme"], ["Depo", "Genişleme"]],
-            ynt: [["Kontrol", "Koord."], ["Kontrol", "Bakım"], ["Koord.", "Bakım"]]
+            esn: [["Çeşit", "Talep"], ["Çeşit", "Hat"], ["Talep", "Hat"]],
+            rsk: [["Kaza", "Arıza"], ["Kaza", "Gıda"], ["Arıza", "Gıda"]],
+            aln: [["Verim", "Depo"], ["Verim", "Genişleme"], ["Depo", "Genişleme"]],
+            ynt: [["Kontrol", "Koord"], ["Kontrol", "Bakım"], ["Koord", "Bakım"]]
         };
 
         function render(list, targetId, prefix) {
@@ -148,11 +131,11 @@
                 const card = document.createElement('div');
                 card.className = 'comparison-card';
                 card.innerHTML = `
-                    <span class="comp-title">${p[0]} - ${p[1]}</span>
-                    <div class="ahp-grid">
-                        <div class="side-name text-right">${p[0]}</div>
-                        <div class="scale-box">
-                            <div class="num-row"><span>9</span><span>7</span><span>5</span><span>3</span><span class="center-p">1</span><span>3</span><span>5</span><span>7</span><span>9</span></div>
+                    <span class="comp-title">${p[0]} vs ${p[1]}</span>
+                    <div class="ahp-table">
+                        <div class="side-label left-l">${p[0]}</div>
+                        <div class="middle-box">
+                            <div class="num-row"><span>9</span><span>7</span><span>5</span><span>3</span><span class="c-one">1</span><span>3</span><span>5</span><span>7</span><span>9</span></div>
                             <div class="radio-row">
                                 <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="-9" required>
                                 <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="-7"><input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="-5">
@@ -161,25 +144,22 @@
                                 <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="7"><input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="9">
                             </div>
                         </div>
-                        <div class="side-name text-left">${p[1]}</div>
+                        <div class="side-label right-l">${p[1]}</div>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        render(pairs.ana, 'ana-group', 'A'); render(pairs.mal, 'mal-group', 'M');
-        render(pairs.ver, 'ver-group', 'V'); render(pairs.esn, 'esn-group', 'E');
-        render(pairs.rsk, 'rsk-group', 'R'); render(pairs.aln, 'aln-group', 'L');
-        render(pairs.ynt, 'ynt-group', 'Y');
+        Object.keys(pairs).forEach(key => render(pairs[key], key + '-group', key.toUpperCase()));
 
         document.getElementById('ahpForm').onsubmit = async function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = 'Gönderiliyor...';
             const res = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
-            if (res.ok) { this.style.display = 'none'; document.getElementById('successMessage').style.display = 'block'; window.scrollTo(0,0); }
+            if (res.ok) { this.style.display = 'none'; alert('Başarıyla Gönderildi!'); window.scrollTo(0,0); }
         };
-        window.onload = () => { setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 400); };
+        window.onload = () => { document.getElementById('loader').style.display = 'none'; };
     </script>
 </body>
 </html>
