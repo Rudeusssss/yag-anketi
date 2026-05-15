@@ -6,7 +6,6 @@
     <title>AHP Karar Destek Sistemi | Yağ Tesisleri</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* TÜM TASARIM BURADA - AYRI CSS DOSYASINA GEREK YOK */
         :root { --primary: #2563eb; --border: #e2e8f0; --text: #1e293b; --light-blue: #eff6ff; }
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; display: flex; justify-content: center; }
         .container { width: 100%; max-width: 700px; }
@@ -16,7 +15,9 @@
         
         .intro-desc { background: #fff; padding: 20px; border-radius: 12px; border-left: 5px solid var(--primary); margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .kriter-bilgi { background: #f1f5f9; padding: 15px; border-radius: 10px; margin-bottom: 25px; font-size: 0.8rem; border: 1px dashed #cbd5e1; }
-        .kriter-bilgi ul { padding-left: 18px; margin: 5px 0 0 0; }
+        .kriter-bilgi strong { color: var(--primary); display: block; margin-bottom: 8px; }
+        .kriter-bilgi ul { padding-left: 18px; margin: 0; }
+        .kriter-bilgi li { margin-bottom: 6px; color: #334155; line-height: 1.4; }
         
         .form-section { margin-bottom: 30px; }
         .section-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 5px; }
@@ -27,8 +28,7 @@
 
         .comparison-card { background: #fff; padding: 20px 8px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
         .ahp-table { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 5px; }
-        .side-label { width: 24%; font-size: 0.7rem; font-weight: 700; color: var(--text); line-height: 1.2; }
-        .left-l { text-align: left; }
+        .side-label { width: 24%; font-size: 0.7rem; font-weight: 700; color: var(--text); line-height: 1.2; text-align: left; }
         .right-l { text-align: right; }
         .middle-box { width: 50%; display: flex; flex-direction: column; align-items: center; }
         .num-row { display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px; }
@@ -42,9 +42,7 @@
         .sub-header { font-size: 0.95rem; font-weight: 800; color: var(--text); margin: 30px 0 12px; padding-bottom: 4px; border-bottom: 3px solid var(--primary); display: inline-block; }
         
         .submit-btn { width: 100%; padding: 15px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; }
-        .submit-btn:hover { background: #1d4ed8; }
         
-        /* Yükleniyor Ekranı CSS */
         .loader-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -69,14 +67,14 @@
         </div>
 
         <div class="kriter-bilgi">
-            <strong>Kriter Tanımları:</strong>
+            <strong>Alt Kriter Tanımları:</strong>
             <ul>
-                <li><strong>Maliyet:</strong> Kurulum, işletme ve taşıma giderleri.</li>
-                <li><strong>Verimlilik:</strong> Üretim hızı ve kapasite kullanım oranı.</li>
-                <li><strong>Esneklik:</strong> Ürün ve talep değişimine uyum yeteneği.</li>
-                <li><strong>Risk:</strong> İş kazası, arıza ve gıda güvenliği riskleri.</li>
-                <li><strong>Alan:</strong> Mevcut alanın verimi ve genişleme imkanı.</li>
-                <li><strong>Yönetim:</strong> Kontrol, koordinasyon ve bakım kolaylığı.</li>
+                <li><strong>Genişleme:</strong> Tesisin gelecekteki kapasite artışlarına ve yeni makine eklemelerine fiziksel uygunluğu.</li>
+                <li><strong>Hat Değişimi:</strong> Üretim hattındaki makinelerin yerini değiştirme veya yeni ürün gruplarına geçiş hızı.</li>
+                <li><strong>Koordinasyon:</strong> Departmanlar arası iş akışının kopmadan ve karmaşa yaşanmadan yönetilebilmesi.</li>
+                <li><strong>Arıza Etkisi:</strong> Yerleşimden kaynaklı bir arızanın tüm üretimi durdurma veya yavaşlatma riski.</li>
+                <li><strong>Depolama:</strong> Hammadde ve mamul stok alanlarının üretim alanıyla olan optimize mesafesi.</li>
+                <li><strong>Bakım:</strong> Makinelerin etrafında teknik servis ve bakım için bırakılan alanın yeterliliği.</li>
             </ul>
         </div>
 
@@ -109,6 +107,10 @@
                 <div class="input-group">
                     <label>Mevcut yerleşimde en büyük sorun nedir?</label>
                     <textarea name="Sorun" rows="2" placeholder="Cevabınız..."></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Yerleşim planı iyileştirilirse en büyük kazanç ne olur?</label>
+                    <textarea name="Kazanc" rows="2" placeholder="Cevabınız..."></textarea>
                 </div>
             </section>
 
