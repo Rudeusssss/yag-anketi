@@ -5,79 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AHP Karar Destek Sistemi | Yağ Tesisleri</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <style>
+        /* TÜM TASARIM BURADA - AYRI CSS DOSYASINA GEREK YOK */
         :root { --primary: #2563eb; --border: #e2e8f0; --text: #1e293b; --light-blue: #eff6ff; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 700px; }
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { font-size: 1.5rem; color: var(--text); margin-bottom: 5px; }
+        .divider { width: 40px; height: 4px; background: var(--primary); margin: 15px auto; border-radius: 2px; }
         
-        .intro-desc {
-            background: #ffffff; padding: 20px; border-radius: 12px;
-            border-left: 5px solid var(--primary); margin-bottom: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: left;
-        }
-        .intro-desc h3 { color: var(--primary); font-size: 1rem; margin-bottom: 8px; }
-        .intro-desc p { font-size: 0.85rem; line-height: 1.5; color: #475569; margin: 0; }
+        .intro-desc { background: #fff; padding: 20px; border-radius: 12px; border-left: 5px solid var(--primary); margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .kriter-bilgi { background: #f1f5f9; padding: 15px; border-radius: 10px; margin-bottom: 25px; font-size: 0.8rem; border: 1px dashed #cbd5e1; }
+        .kriter-bilgi ul { padding-left: 18px; margin: 5px 0 0 0; }
+        
+        .form-section { margin-bottom: 30px; }
+        .section-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 5px; }
+        .row { display: flex; gap: 15px; margin-bottom: 15px; }
+        .input-group { flex: 1; display: flex; flex-direction: column; }
+        .input-group label { font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; }
+        input, select, textarea { padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; }
 
-        .kriter-bilgi {
-            background: #f8fafc; padding: 15px; border-radius: 10px;
-            margin-bottom: 25px; font-size: 0.8rem; border: 1px dashed #cbd5e1;
-        }
-        .kriter-bilgi ul { padding-left: 18px; margin: 0; }
-        .kriter-bilgi li { margin-bottom: 5px; color: #334155; }
+        .comparison-card { background: #fff; padding: 20px 8px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .ahp-table { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 5px; }
+        .side-label { width: 24%; font-size: 0.7rem; font-weight: 700; color: var(--text); line-height: 1.2; }
+        .left-l { text-align: left; }
+        .right-l { text-align: right; }
+        .middle-box { width: 50%; display: flex; flex-direction: column; align-items: center; }
+        .num-row { display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px; }
+        .num-row span { width: 11%; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-align: center; transition: 0.3s; }
+        .radio-row { display: flex; justify-content: space-between; width: 100%; }
+        .radio-row label { width: 11%; display: flex; justify-content: center; }
 
-        .comparison-card {
-            background: #fff; padding: 20px 8px; border-radius: 16px;
-            margin-bottom: 20px; border: 1px solid var(--border);
-        }
-
-        .ahp-table {
-            display: flex; align-items: center; justify-content: space-between;
-            width: 100%; gap: 5px;
-        }
-
-        .side-label {
-            width: 24%; font-size: 0.7rem; font-weight: 700;
-            color: var(--text); line-height: 1.2;
-        }
-        .left-l { text-align: left; padding-left: 2px; }
-        .right-l { text-align: right; padding-right: 2px; }
-
-        .middle-box {
-            width: 50%; display: flex; flex-direction: column; align-items: center;
-        }
-
-        .num-row {
-            display: flex; justify-content: space-between; width: 100%;
-            margin-bottom: 8px;
-        }
-        .num-row span {
-            width: 11%; font-size: 0.65rem; font-weight: 800;
-            color: #94a3b8; text-align: center; transition: 0.3s;
-        }
-
-        .radio-row {
-            display: flex; justify-content: space-between; width: 100%;
-        }
-        .radio-row label {
-            width: 11%; display: flex; justify-content: center; align-items: center;
-        }
-
-        input[type="radio"] {
-            appearance: none; -webkit-appearance: none;
-            width: 16px; height: 16px; border: 2px solid #cbd5e1;
-            border-radius: 50%; outline: none; cursor: pointer;
-            transition: 0.3s; position: relative; background: #fff;
-        }
-        input[type="radio"]:checked {
-            border-color: var(--primary); background: var(--primary);
-            box-shadow: 0 0 0 4px var(--light-blue);
-        }
+        input[type="radio"] { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; border: 2px solid #cbd5e1; border-radius: 50%; cursor: pointer; transition: 0.3s; background: #fff; }
+        input[type="radio"]:checked { border-color: var(--primary); background: var(--primary); box-shadow: 0 0 0 4px var(--light-blue); }
         .selected-num { color: var(--primary) !important; transform: scale(1.2); }
-
-        .sub-header {
-            font-size: 0.95rem; font-weight: 800; color: var(--text);
-            margin: 30px 0 12px; padding-bottom: 4px;
-            border-bottom: 3px solid var(--primary); display: inline-block;
-        }
+        .sub-header { font-size: 0.95rem; font-weight: 800; color: var(--text); margin: 30px 0 12px; padding-bottom: 4px; border-bottom: 3px solid var(--primary); display: inline-block; }
+        
+        .submit-btn { width: 100%; padding: 15px; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+        .submit-btn:hover { background: #1d4ed8; }
+        
+        /* Yükleniyor Ekranı CSS */
+        .loader-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        @media (max-width: 600px) { .row { flex-direction: column; } .side-label { font-size: 0.65rem; } }
     </style>
 </head>
 <body>
@@ -85,7 +57,7 @@
     <div class="loader-wrapper" id="loader"><div class="loader"></div></div>
 
     <div class="container">
-        <header class="main-header">
+        <header>
             <h1>Tesis Analiz Portalı</h1>
             <p>AHP Karar Destek Sistemi</p>
             <div class="divider"></div>
@@ -109,7 +81,6 @@
         </div>
 
         <form id="ahpForm" action="https://formspree.io/f/mjgllzgg" method="POST">
-            
             <section class="form-section">
                 <h2 class="section-title">Uzman Bilgileri</h2>
                 <div class="row">
@@ -118,7 +89,7 @@
                 </div>
                 <div class="row">
                     <div class="input-group"><label>Ünvan</label><input type="text" name="Unvan" required></div>
-                    <div class="input-group"><label>Tecrübe</label><input type="number" name="Yil" required></div>
+                    <div class="input-group"><label>Tecrübe (Yıl)</label><input type="number" name="Yil" required></div>
                 </div>
             </section>
 
@@ -138,10 +109,6 @@
                 <div class="input-group">
                     <label>Mevcut yerleşimde en büyük sorun nedir?</label>
                     <textarea name="Sorun" rows="2" placeholder="Cevabınız..."></textarea>
-                </div>
-                <div class="input-group">
-                    <label>Yerleşim planı iyileştirilirse en büyük kazanç ne olur?</label>
-                    <textarea name="Kazanc" rows="2" placeholder="Cevabınız..."></textarea>
                 </div>
             </section>
 
@@ -171,7 +138,7 @@
                         <div class="side-label left-l">${p[0]}</div>
                         <div class="middle-box">
                             <div class="num-row" id="nums_${uniqueId}">
-                                <span>9</span><span>7</span><span>5</span><span>3</span><span class="c-one">1</span><span>3</span><span>5</span><span>7</span><span>9</span>
+                                <span>9</span><span>7</span><span>5</span><span>3</span><span class="selected-num">1</span><span>3</span><span>5</span><span>7</span><span>9</span>
                             </div>
                             <div class="radio-row">
                                 ${[-9,-7,-5,-3,1,3,5,7,9].map((val, i) => `
@@ -192,7 +159,7 @@
 
         function updateColor(radio, rowId, index) {
             const spans = document.getElementById(rowId).getElementsByTagName('span');
-            for(let s of spans) s.classList.remove('selected-num', 'c-one');
+            for(let s of spans) s.classList.remove('selected-num');
             spans[index].classList.add('selected-num');
         }
 
@@ -201,6 +168,17 @@
         document.getElementById('ahpForm').onsubmit = async function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = 'Gönderiliyor...';
-            const res = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
-            if (res.ok) { this.style.display = 'none'; alert('Analiz Başarıyla Gönderildi!'); window.scrollTo(0,0); }
+            try {
+                const res = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
+                if (res.ok) { this.style.display = 'none'; alert('Analiz Başarıyla Gönderildi!'); window.scrollTo(0,0); }
+            } catch (err) { alert('Hata oluştu, tekrar deneyin.'); btn.disabled = false; btn.innerText = 'Analizi Tamamla'; }
         };
+
+        window.onload = () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => { loader.style.display = 'none'; }, 500);
+        };
+    </script>
+</body>
+</html>
