@@ -3,74 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AHP Analiz Portalı</title>
+    <title>Tesis Analiz Portalı | AHP</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        :root { --primary: #2563eb; --border: #e2e8f0; --text: #1e293b; }
+        :root { --primary: #2563eb; --border: #e2e8f0; --text: #1e293b; --light-blue: #eff6ff; }
         
+        /* Profesyonel Bilgilendirme Kutusu */
+        .intro-desc {
+            background: #ffffff; padding: 20px; border-radius: 12px;
+            border-left: 5px solid var(--primary); margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-align: left;
+        }
+        .intro-desc h3 { color: var(--primary); font-size: 1rem; margin-bottom: 8px; }
+        .intro-desc p { font-size: 0.85rem; line-height: 1.5; color: #475569; margin: 0; }
+
         .comparison-card {
-            background: #fff; padding: 15px 5px; border-radius: 12px;
+            background: #fff; padding: 20px 8px; border-radius: 16px;
             margin-bottom: 20px; border: 1px solid var(--border);
         }
 
-        .comp-title {
-            display: block; font-size: 0.7rem; font-weight: 800;
-            color: var(--primary); margin-bottom: 15px; text-align: center;
-            text-transform: uppercase; letter-spacing: 0.5px;
-        }
-
-        /* Ana Taşıyıcı: Esnek ama taşmayan yapı */
         .ahp-table {
             display: flex; align-items: center; justify-content: space-between;
-            width: 100%; gap: 2px;
+            width: 100%; gap: 5px;
         }
 
-        /* Yanlardaki Kriter İsimleri */
+        /* Soldaki kriteri daha sola yasladık */
         .side-label {
-            width: 22%; font-size: 0.65rem; font-weight: 700;
-            color: var(--text); line-height: 1.1; word-wrap: break-word;
+            width: 24%; font-size: 0.7rem; font-weight: 700;
+            color: var(--text); line-height: 1.2;
         }
-        .left-l { text-align: right; padding-right: 4px; }
-        .right-l { text-align: left; padding-left: 4px; }
+        .left-l { text-align: left; padding-left: 2px; } /* Sola yaklaştırma */
+        .right-l { text-align: right; padding-right: 2px; }
 
-        /* Orta Alan: Sayı ve Butonların Kilitlendiği Yer */
         .middle-box {
-            width: 56%; display: flex; flex-direction: column; align-items: center;
+            width: 50%; display: flex; flex-direction: column; align-items: center;
         }
 
-        /* Sayı Satırı */
         .num-row {
             display: flex; justify-content: space-between; width: 100%;
-            margin-bottom: 6px; padding: 0 2px;
+            margin-bottom: 8px;
         }
         .num-row span {
-            width: 11%; font-size: 0.6rem; font-weight: 800;
-            color: #94a3b8; text-align: center;
+            width: 11%; font-size: 0.65rem; font-weight: 800;
+            color: #94a3b8; text-align: center; transition: 0.3s;
         }
-        .num-row .c-one { color: var(--primary); }
 
-        /* Radyo Buton Satırı */
         .radio-row {
             display: flex; justify-content: space-between; width: 100%;
-            padding: 0 2px;
         }
-        .radio-row input {
-            width: 11%; height: 15px; cursor: pointer; margin: 0;
-            -webkit-appearance: radio; /* Mobil tarayıcı uyumu için */
+        .radio-row label {
+            width: 11%; display: flex; justify-content: center; align-items: center;
         }
+
+        /* Tıklanan Değerin Mavi Olması İçin Sihirli CSS */
+        input[type="radio"] {
+            appearance: none; -webkit-appearance: none;
+            width: 16px; height: 16px; border: 2px solid #cbd5e1;
+            border-radius: 50%; outline: none; cursor: pointer;
+            transition: 0.3s; position: relative; background: #fff;
+        }
+        input[type="radio"]:checked {
+            border-color: var(--primary); background: var(--primary);
+            box-shadow: 0 0 0 4px var(--light-blue);
+        }
+        /* Seçilen butonun üstündeki rakamı renklendirme (JS ile desteklendi) */
+        .selected-num { color: var(--primary) !important; transform: scale(1.2); }
 
         .sub-header {
-            font-size: 0.9rem; font-weight: 800; color: var(--text);
-            margin: 25px 0 10px; padding-bottom: 4px;
-            border-bottom: 2px solid var(--primary); display: inline-block;
-        }
-
-        /* Masaüstü için hafif genişletme */
-        @media (min-width: 768px) {
-            .side-label { font-size: 0.8rem; }
-            .num-row span { font-size: 0.7rem; }
-            .radio-row input { height: 18px; }
+            font-size: 0.95rem; font-weight: 800; color: var(--text);
+            margin: 30px 0 12px; padding-bottom: 4px;
+            border-bottom: 3px solid var(--primary); display: inline-block;
         }
     </style>
 </head>
@@ -81,9 +84,17 @@
     <div class="container">
         <header class="main-header">
             <h1>Tesis Analiz Portalı</h1>
-            <p>AHP Karar Destek Sistemi</p>
+            <p>Endüstriyel Karar Destek Sistemi</p>
             <div class="divider"></div>
         </header>
+
+        <div class="intro-desc">
+            <h3>Puanlama Rehberi</h3>
+            <p>
+                İki kriterden hangisi sizin için daha öncelikli ise o tarafa doğru seçim yapınız. 
+                Seçtiğiniz değer <strong>mavi</strong> renge dönecektir. Ortadaki 1, iki kriterin eşit öneme sahip olduğunu belirtir.
+            </p>
+        </div>
 
         <form id="ahpForm" action="https://formspree.io/f/mjgllzgg" method="POST">
             
@@ -100,14 +111,14 @@
             </section>
 
             <section class="form-section">
-                <h2 class="section-title">Değerlendirme</h2>
+                <h2 class="section-title">Kriter Değerlendirmesi</h2>
                 <div id="ana-group"></div>
-                <div class="sub-header">Maliyet</div> <div id="mal-group"></div>
-                <div class="sub-header">Verimlilik</div> <div id="ver-group"></div>
-                <div class="sub-header">Esneklik</div> <div id="esn-group"></div>
-                <div class="sub-header">Risk</div> <div id="rsk-group"></div>
-                <div class="sub-header">Alan</div> <div id="aln-group"></div>
-                <div class="sub-header">Yönetim</div> <div id="ynt-group"></div>
+                <div class="sub-header">Maliyet Grubu</div> <div id="mal-group"></div>
+                <div class="sub-header">Verimlilik Grubu</div> <div id="ver-group"></div>
+                <div class="sub-header">Esneklik Grubu</div> <div id="esn-group"></div>
+                <div class="sub-header">Risk Grubu</div> <div id="rsk-group"></div>
+                <div class="sub-header">Alan Grubu</div> <div id="aln-group"></div>
+                <div class="sub-header">Yönetim Grubu</div> <div id="ynt-group"></div>
             </section>
 
             <button type="submit" class="submit-btn" id="submitBtn">Analizi Tamamla</button>
@@ -127,21 +138,25 @@
 
         function render(list, targetId, prefix) {
             const container = document.getElementById(targetId);
-            list.forEach(p => {
+            list.forEach((p, rowIndex) => {
+                const uniqueId = `${prefix}_${rowIndex}`;
                 const card = document.createElement('div');
                 card.className = 'comparison-card';
                 card.innerHTML = `
-                    <span class="comp-title">${p[0]} vs ${p[1]}</span>
                     <div class="ahp-table">
                         <div class="side-label left-l">${p[0]}</div>
                         <div class="middle-box">
-                            <div class="num-row"><span>9</span><span>7</span><span>5</span><span>3</span><span class="c-one">1</span><span>3</span><span>5</span><span>7</span><span>9</span></div>
+                            <div class="num-row" id="nums_${uniqueId}">
+                                <span>9</span><span>7</span><span>5</span><span>3</span><span class="c-one">1</span><span>3</span><span>5</span><span>7</span><span>9</span>
+                            </div>
                             <div class="radio-row">
-                                <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="-9" required>
-                                <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="-7"><input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="-5">
-                                <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="-3"><input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="1" checked>
-                                <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="3"><input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="5">
-                                <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="7"><input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="9">
+                                ${[-9,-7,-5,-3,1,3,5,7,9].map((val, i) => `
+                                    <label>
+                                        <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="${val}" 
+                                        ${val === 1 ? 'checked' : ''} 
+                                        onclick="updateColor(this, 'nums_${uniqueId}', ${i})">
+                                    </label>
+                                `).join('')}
                             </div>
                         </div>
                         <div class="side-label right-l">${p[1]}</div>
@@ -151,13 +166,19 @@
             });
         }
 
+        function updateColor(radio, rowId, index) {
+            const spans = document.getElementById(rowId).getElementsByTagName('span');
+            for(let s of spans) s.classList.remove('selected-num', 'c-one');
+            spans[index].classList.add('selected-num');
+        }
+
         Object.keys(pairs).forEach(key => render(pairs[key], key + '-group', key.toUpperCase()));
 
         document.getElementById('ahpForm').onsubmit = async function(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = 'Gönderiliyor...';
             const res = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
-            if (res.ok) { this.style.display = 'none'; alert('Başarıyla Gönderildi!'); window.scrollTo(0,0); }
+            if (res.ok) { this.style.display = 'none'; alert('Analiz Başarıyla Gönderildi!'); window.scrollTo(0,0); }
         };
         window.onload = () => { document.getElementById('loader').style.display = 'none'; };
     </script>
