@@ -7,17 +7,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .sub-group-title { font-size: 0.95rem; color: #1e293b; margin: 25px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; font-weight: 700; }
-        .ahp-scale-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 10px; }
-        .ahp-scale { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative; }
-        .radio-group { display: flex; justify-content: space-between; width: 220px; }
-        .number-labels { display: flex; justify-content: space-between; width: 220px; margin-top: 8px; font-size: 0.7rem; color: #64748b; font-weight: 600; }
-        .side-label { font-size: 0.8rem; font-weight: 700; width: 120px; color: #334155; }
-        .left-label { text-align: right; padding-right: 15px; }
-        .right-label { text-align: left; padding-left: 15px; }
-        .comparison-item { background: #f8fafc; padding: 25px 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #f1f5f9; }
-        .comp-text { font-size: 0.85rem; font-weight: 600; text-align: center; margin-bottom: 20px; color: #1e293b; background: #e2e8f0; display: inline-block; padding: 2px 12px; border-radius: 20px; }
-        .text-center-wrapper { text-align: center; }
+        :root { --primary: #2563eb; --bg-item: #ffffff; --border-color: #e2e8f0; }
+        .survey-card { padding: 25px 15px !important; }
+        .sub-group-title { font-size: 1rem; color: var(--primary); margin: 30px 0 15px; font-weight: 800; border-bottom: 3px solid var(--primary); display: inline-block; }
+        
+        .comparison-item { 
+            background: var(--bg-item); 
+            padding: 20px 10px; 
+            border-radius: 12px; 
+            margin-bottom: 25px; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .comp-header { text-align: center; margin-bottom: 20px; }
+        .comp-text { font-size: 0.85rem; font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 4px 15px; border-radius: 30px; }
+
+        .ahp-table { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; }
+        .side-label { font-size: 0.8rem; font-weight: 700; width: 22%; color: #334155; line-height: 1.2; }
+        .left-label { text-align: right; }
+        .right-label { text-align: left; }
+
+        .scale-box { display: flex; flex-direction: column; align-items: center; width: 56%; }
+        .numbers { display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px; }
+        .numbers span { font-size: 0.7rem; font-weight: 800; color: #64748b; width: 20px; text-align: center; }
+        .numbers span.active { color: var(--primary); }
+
+        .radios { display: flex; justify-content: space-between; width: 100%; }
+        input[type="radio"] { width: 18px; height: 18px; cursor: pointer; margin: 0; }
+
+        .ara-degerler-notu { font-size: 0.75rem; color: #94a3b8; text-align: center; margin-top: 10px; font-style: italic; }
+
+        @media (max-width: 600px) {
+            .side-label { width: 25%; font-size: 0.7rem; }
+            .scale-box { width: 50%; }
+            .numbers span { font-size: 0.6rem; }
+        }
     </style>
 </head>
 <body>
@@ -36,173 +61,97 @@
                 
                 <section class="form-section">
                     <h2 class="section-title">Katılımcı Bilgileri</h2>
-                    <div class="input-group">
-                        <label>Ad Soyad / Ünvan</label>
-                        <input type="text" name="Katilimci_Bilgisi" placeholder="Örn: Üretim Müdürü" required>
-                    </div>
+                    <div class="input-group"><label>Ad Soyad / Ünvan</label><input type="text" name="Katilimci" placeholder="Örn: Üretim Müdürü" required></div>
                     <div class="row">
-                        <div class="input-group">
-                            <label>Deneyim Süresi (Yıl)</label>
-                            <input type="number" name="Deneyim_Yili" required>
-                        </div>
-                        <div class="input-group">
-                            <label>Cinsiyet</label>
-                            <select name="Cinsiyet" required>
-                                <option value="" disabled selected>Seçiniz</option>
-                                <option value="Erkek">Erkek</option>
-                                <option value="Kadin">Kadın</option>
-                            </select>
-                        </div>
+                        <div class="input-group"><label>Deneyim (Yıl)</label><input type="number" name="Deneyim" required></div>
+                        <div class="input-group"><label>Cinsiyet</label><select name="Cinsiyet" required><option value="" disabled selected>Seçiniz</option><option value="Erkek">Erkek</option><option value="Kadin">Kadın</option></select></div>
                     </div>
                 </section>
 
                 <div class="info-alert">
-                    <strong>AHP Puanlama Rehberi:</strong> <br>
-                    1: Eşit Önemli | 3: Biraz | 5: Güçlü | 7: Çok Güçlü | 9: Aşırı Derecede Önemli <br>
-                    <em>*2, 4, 6, 8 değerleri ara değerler (uzlaşma) olarak kullanılır.</em>
+                    <strong>Puanlama:</strong> 1: Eşit | 3: Biraz | 5: Güçlü | 7: Çok Güçlü | 9: Aşırı Önemli <br>
+                    <em>Sayılar butonların tam üstünde hizalanmıştır.</em>
                 </div>
 
                 <section class="form-section">
-                    <h2 class="section-title">1. Ana Kriterlerin Karşılaştırılması</h2>
-                    <div id="ana-kriterler-container"></div>
+                    <h2 class="section-title">1. Ana Kriterler</h2>
+                    <div id="ana-container"></div>
                 </section>
 
                 <section class="form-section">
-                    <h2 class="section-title">2. Alt Kriterlerin Karşılaştırılması</h2>
-                    
-                    <h3 class="sub-group-title">2.1. Maliyet Alt Kriterleri</h3>
-                    <div id="maliyet-alt-container"></div>
-
-                    <h3 class="sub-group-title">2.2. Verimlilik Alt Kriterleri</h3>
-                    <div id="verimlilik-alt-container"></div>
-
-                    <h3 class="sub-group-title">2.3. Esneklik Alt Kriterleri</h3>
-                    <div id="esneklik-alt-container"></div>
-
-                    <h3 class="sub-group-title">2.4. Risk ve Güvenlik Alt Kriterleri</h3>
-                    <div id="risk-alt-container"></div>
-
-                    <h3 class="sub-group-title">2.5. Alan Kullanımı Alt Kriterleri</h3>
-                    <div id="alan-alt-container"></div>
-
-                    <h3 class="sub-group-title">2.6. Yönetilebilirlik Alt Kriterleri</h3>
-                    <div id="yonetilebilirlik-alt-container"></div>
+                    <h2 class="section-title">2. Alt Kriterler</h2>
+                    <h3 class="sub-group-title">2.1. Maliyet</h3> <div id="mal-container"></div>
+                    <h3 class="sub-group-title">2.2. Verimlilik</h3> <div id="ver-container"></div>
+                    <h3 class="sub-group-title">2.3. Esneklik</h3> <div id="esn-container"></div>
+                    <h3 class="sub-group-title">2.4. Risk ve Güvenlik</h3> <div id="rsk-container"></div>
+                    <h3 class="sub-group-title">2.5. Alan Kullanımı</h3> <div id="aln-container"></div>
+                    <h3 class="sub-group-title">2.6. Yönetilebilirlik</h3> <div id="ynt-container"></div>
                 </section>
 
                 <section class="form-section">
-                    <h2 class="section-title">3. Genel Değerlendirme</h2>
-                    <div class="input-group">
-                        <label>Sizce en kritik faktör hangisidir?</label>
-                        <textarea name="En_Kritik_Faktor" rows="2" required></textarea>
-                    </div>
-                    <div class="input-group">
-                        <label>Mevcut yerleşimde en büyük sorun nedir?</label>
-                        <textarea name="Mevcut_Sorun" rows="2" required></textarea>
-                    </div>
-                    <div class="input-group">
-                        <label>İyileştirme sonucu en büyük kazanç ne olur?</label>
-                        <textarea name="Beklenen_Kazanc" rows="2" required></textarea>
-                    </div>
+                    <h2 class="section-title">3. Görüşler</h2>
+                    <div class="input-group"><label>En kritik faktör?</label><textarea name="Kritik_Faktor" rows="2" required></textarea></div>
+                    <div class="input-group"><label>En büyük sorun?</label><textarea name="Sorun" rows="2" required></textarea></div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Anketi Tamamla</button>
                 </section>
-
-                <button type="submit" class="submit-btn" id="submitBtn">Anketi Tamamla ve Gönder</button>
             </form>
-
-            <div id="successMessage" class="success-msg" style="display: none;">
-                <div style="font-size: 50px; color: #22c55e;">✓</div>
-                <h3>Teşekkür Ederiz!</h3>
-                <p>Verileriniz kaydedildi. Katkınız tezin analizi için çok değerlidir.</p>
-            </div>
+            <div id="successMessage" class="success-msg" style="display: none;"><h3>Başarıyla Gönderildi! ✓</h3></div>
         </div>
     </div>
 
     <script>
-        const surveyData = {
-            ana: [
-                ["Maliyet", "Verimlilik"], ["Maliyet", "Esneklik"], ["Maliyet", "Risk ve Güvenlik"],
-                ["Maliyet", "Alan Kullanımı"], ["Maliyet", "Yönetilebilirlik"],
-                ["Verimlilik", "Esneklik"], ["Verimlilik", "Risk ve Güvenlik"],
-                ["Verimlilik", "Alan Kullanımı"], ["Verimlilik", "Yönetilebilirlik"],
-                ["Esneklik", "Risk ve Güvenlik"], ["Esneklik", "Alan Kullanımı"],
-                ["Esneklik", "Yönetilebilirlik"], ["Risk ve Güvenlik", "Alan Kullanımı"],
-                ["Risk ve Güvenlik", "Yönetilebilirlik"], ["Alan Kullanımı", "Yönetilebilirlik"]
-            ],
-            maliyet: [["Malzeme Taşıma", "Kurulum Maliyeti"], ["Malzeme Taşıma", "İşletme Maliyeti"], ["Kurulum Maliyeti", "İşletme Maliyeti"]],
-            verimlilik: [["Üretim Hızı", "Bekleme Süreleri"], ["Üretim Hızı", "Kapasite Kullanımı"], ["Bekleme Süreleri", "Kapasite Kullanımı"]],
-            esneklik: [["Ürün Çeşitliliği", "Talep Değişimi"], ["Ürün Çeşitliliği", "Hat Değişim Kolaylığı"], ["Talep Değişimi", "Hat Değişim Kolaylığı"]],
-            risk: [["İş Kazası Riski", "Arıza Etkisi"], ["İş Kazası Riski", "Gıda Güvenliği"], ["Arıza Etkisi", "Gıda Güvenliği"]],
-            alan: [["Alan Verimliliği", "Depolama Kullanımı"], ["Alan Verimliliği", "Genişleme İmkanı"], ["Depolama Kullanımı", "Genişleme İmkanı"]],
-            yonetim: [["Kontrol Kolaylığı", "Koordinasyon"], ["Kontrol Kolaylığı", "Bakım Yönetimi"], ["Koordinasyon", "Bakım Yönetimi"]]
+        const data = {
+            ana: [["Maliyet", "Verimlilik"], ["Maliyet", "Esneklik"], ["Maliyet", "Risk"], ["Maliyet", "Alan"], ["Maliyet", "Yönetim"], ["Verimlilik", "Esneklik"], ["Verimlilik", "Risk"], ["Verimlilik", "Alan"], ["Verimlilik", "Yönetim"], ["Esneklik", "Risk"], ["Esneklik", "Alan"], ["Esneklik", "Yönetim"], ["Risk", "Alan"], ["Risk", "Yönetim"], ["Alan", "Yönetim"]],
+            mal: [["Taşıma", "Kurulum"], ["Taşıma", "İşletme"], ["Kurulum", "İşletme"]],
+            ver: [["Hız", "Bekleme"], ["Hız", "Kapasite"], ["Bekleme", "Kapasite"]],
+            esn: [["Çeşitlilik", "Talep"], ["Çeşitlilik", "Hat Değişimi"], ["Talep", "Hat Değişimi"]],
+            rsk: [["İş Kazası", "Arıza"], ["İş Kazası", "Gıda Güv."], ["Arıza", "Gıda Güv."]],
+            aln: [["Alan Verimi", "Depolama"], ["Alan Verimi", "Genişleme"], ["Depolama", "Genişleme"]],
+            ynt: [["Kontrol", "Koordinasyon"], ["Kontrol", "Bakım"], ["Koordinasyon", "Bakım"]]
         };
 
-        function createRows(dataList, containerId, prefix) {
-            const container = document.getElementById(containerId);
-            dataList.forEach(pair => {
+        function build(list, target, id) {
+            const el = document.getElementById(target);
+            list.forEach(p => {
                 const row = document.createElement('div');
                 row.className = 'comparison-item';
                 row.innerHTML = `
-                    <div class="text-center-wrapper"><p class="comp-text">${pair[0]} vs. ${pair[1]}</p></div>
-                    <div class="ahp-scale-wrapper">
-                        <div class="ahp-scale">
-                            <span class="side-label left-label">${pair[0]}</span>
-                            <div class="radio-group">
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="-9" required>
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="-7">
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="-5">
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="-3">
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="1" checked>
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="3">
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="5">
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="7">
-                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="9">
+                    <div class="comp-header"><span class="comp-text">${p[0]} vs. ${p[1]}</span></div>
+                    <div class="ahp-table">
+                        <span class="side-label left-label">${p[0]}</span>
+                        <div class="scale-box">
+                            <div class="numbers"><span>9</span><span>7</span><span>5</span><span>3</span><span class="active">1</span><span>3</span><span>5</span><span>7</span><span>9</span></div>
+                            <div class="radios">
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="-9" required>
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="-7">
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="-5">
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="-3">
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="1" checked>
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="3">
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="5">
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="7">
+                                <input type="radio" name="${id}_${p[0]}_${p[1]}" value="9">
                             </div>
-                            <span class="side-label right-label">${pair[1]}</span>
                         </div>
-                        <div class="number-labels">
-                            <span>9</span><span>7</span><span>5</span><span>3</span><span style="color:var(--primary)">1</span><span>3</span><span>5</span><span>7</span><span>9</span>
-                        </div>
+                        <span class="side-label right-label">${p[1]}</span>
                     </div>
                 `;
-                container.appendChild(row);
+                el.appendChild(row);
             });
         }
 
-        createRows(surveyData.ana, 'ana-kriterler-container', 'ANA');
-        createRows(surveyData.maliyet, 'maliyet-alt-container', 'MAL');
-        createRows(surveyData.verimlilik, 'verimlilik-alt-container', 'VER');
-        createRows(surveyData.esneklik, 'esneklik-alt-container', 'ESN');
-        createRows(surveyData.risk, 'risk-alt-container', 'RSK');
-        createRows(surveyData.alan, 'alan-alt-container', 'ALN');
-        createRows(surveyData.yonetim, 'yonetilebilirlik-alt-container', 'YNT');
-
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 500);
-        });
+        build(data.ana, 'ana-container', 'A'); build(data.mal, 'mal-container', 'M');
+        build(data.ver, 'ver-container', 'V'); build(data.esn, 'esn-container', 'E');
+        build(data.rsk, 'rsk-container', 'R'); build(data.aln, 'aln-container', 'L');
+        build(data.ynt, 'ynt-container', 'Y');
 
         document.getElementById('ahpForm').onsubmit = async function(e) {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerText = 'Gönderiliyor...';
-
-            const response = await fetch(this.action, {
-                method: 'POST',
-                body: new FormData(this),
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                this.style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
-                window.scrollTo(0,0);
-            } else {
-                alert('Gönderim hatası. Lütfen internetinizi kontrol edip tekrar deneyin.');
-                btn.disabled = false;
-                btn.innerText = 'Anketi Tamamla ve Gönder';
-            }
+            const b = document.getElementById('submitBtn'); b.disabled = true; b.innerText = 'Gidiyor...';
+            const r = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
+            if (r.ok) { this.style.display = 'none'; document.getElementById('successMessage').style.display = 'block'; window.scrollTo(0,0); }
         };
+        window.onload = () => { setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 400); };
     </script>
 </body>
 </html>
