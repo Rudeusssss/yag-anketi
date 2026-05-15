@@ -9,7 +9,6 @@
     <style>
         :root { --primary: #2563eb; --border: #e2e8f0; --text-main: #1e293b; }
         
-        /* Giriş Açıklama Alanı */
         .intro-desc {
             background: #ffffff;
             padding: 25px;
@@ -21,7 +20,6 @@
         .intro-desc h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.1rem; }
         .intro-desc p { font-size: 0.9rem; line-height: 1.6; color: #475569; }
 
-        /* AHP Karşılaştırma Satırı Yapısı */
         .comparison-card {
             background: #fff;
             padding: 25px 15px;
@@ -53,7 +51,6 @@
         .text-right { text-align: right; }
         .text-left { text-align: left; }
 
-        /* Sayı ve Buton Hizalama - Burası Kritik */
         .scale-box {
             display: flex;
             flex-direction: column;
@@ -127,10 +124,25 @@
             
             <section class="form-section">
                 <h2 class="section-title">Uzman Bilgileri</h2>
-                <div class="input-group"><label>Ünvan / Pozisyon</label><input type="text" name="Uzman_Unvan" placeholder="Örn: Fabrika Müdürü" required></div>
                 <div class="row">
-                    <div class="input-group"><label>Tecrübe (Yıl)</label><input type="number" name="Tecrube" required></div>
-                    <div class="input-group"><label>Sektör Bilgisi</label><input type="text" name="Sektor" value="Bitkisel Yağ" readonly></div>
+                    <div class="input-group">
+                        <label>Adınız</label>
+                        <input type="text" name="Ad" placeholder="Örn: Ahmet" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Soyadınız</label>
+                        <input type="text" name="Soyad" placeholder="Örn: Yılmaz" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Ünvan / Pozisyon</label>
+                        <input type="text" name="Uzman_Unvan" placeholder="Örn: Fabrika Müdürü" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Tecrübe (Yıl)</label>
+                        <input type="number" name="Tecrube" placeholder="Örn: 15" required>
+                    </div>
                 </div>
             </section>
 
@@ -151,7 +163,7 @@
 
             <section class="form-section">
                 <h2 class="section-title">3. Sonuç ve Öneriler</h2>
-                <div class="input-group"><label>En kritik yerleşim faktörü nedir?</label><textarea name="Gorus_Kritik" rows="2"></textarea></div>
+                <div class="input-group"><label>En kritik yerleşim faktörü nedir?</label><textarea name="Gorus_Kritik" rows="2" placeholder="Sizce en önemli unsur hangisidir?"></textarea></div>
                 <button type="submit" class="submit-btn" id="submitBtn">Analizi Tamamla ve Gönder</button>
             </section>
         </form>
