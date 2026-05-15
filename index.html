@@ -6,6 +6,19 @@
     <title>Bitkisel Yağ Tesisleri AHP Analizi</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .sub-group-title { font-size: 0.95rem; color: #1e293b; margin: 25px 0 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 5px; font-weight: 700; }
+        .ahp-scale-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 10px; }
+        .ahp-scale { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative; }
+        .radio-group { display: flex; justify-content: space-between; width: 220px; }
+        .number-labels { display: flex; justify-content: space-between; width: 220px; margin-top: 8px; font-size: 0.7rem; color: #64748b; font-weight: 600; }
+        .side-label { font-size: 0.8rem; font-weight: 700; width: 120px; color: #334155; }
+        .left-label { text-align: right; padding-right: 15px; }
+        .right-label { text-align: left; padding-left: 15px; }
+        .comparison-item { background: #f8fafc; padding: 25px 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #f1f5f9; }
+        .comp-text { font-size: 0.85rem; font-weight: 600; text-align: center; margin-bottom: 20px; color: #1e293b; background: #e2e8f0; display: inline-block; padding: 2px 12px; border-radius: 20px; }
+        .text-center-wrapper { text-align: center; }
+    </style>
 </head>
 <body>
 
@@ -44,8 +57,9 @@
                 </section>
 
                 <div class="info-alert">
-                    <strong>AHP Puanlama Rehberi:</strong> Hangi kriter daha önemliyse o tarafa doğru işaretleyin. <br>
-                    (1: Eşit, 3: Biraz, 5: Güçlü, 7: Çok Güçlü, 9: Aşırı Derecede Önemli)
+                    <strong>AHP Puanlama Rehberi:</strong> <br>
+                    1: Eşit Önemli | 3: Biraz | 5: Güçlü | 7: Çok Güçlü | 9: Aşırı Derecede Önemli <br>
+                    <em>*2, 4, 6, 8 değerleri ara değerler (uzlaşma) olarak kullanılır.</em>
                 </div>
 
                 <section class="form-section">
@@ -97,10 +111,9 @@
             <div id="successMessage" class="success-msg" style="display: none;">
                 <div style="font-size: 50px; color: #22c55e;">✓</div>
                 <h3>Teşekkür Ederiz!</h3>
-                <p>Verileriniz başarıyla kaydedildi. Akademik çalışmamıza katkınız çok değerlidir.</p>
+                <p>Verileriniz kaydedildi. Katkınız tezin analizi için çok değerlidir.</p>
             </div>
         </div>
-        <footer class="footer"><p>&copy; 2026 Endüstriyel Tesis Analiz Portalı</p></footer>
     </div>
 
     <script>
@@ -128,17 +141,26 @@
                 const row = document.createElement('div');
                 row.className = 'comparison-item';
                 row.innerHTML = `
-                    <p class="comp-text">${pair[0]} vs. ${pair[1]}</p>
-                    <div class="ahp-scale">
-                        <span class="side-label">${pair[0]}</span>
-                        <div class="radio-group">
-                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="-9" required>
-                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="-5">
-                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="1" checked>
-                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="5">
-                            <input type="radio" name="${prefix}_${pair[0]}_${pair[1]}" value="9">
+                    <div class="text-center-wrapper"><p class="comp-text">${pair[0]} vs. ${pair[1]}</p></div>
+                    <div class="ahp-scale-wrapper">
+                        <div class="ahp-scale">
+                            <span class="side-label left-label">${pair[0]}</span>
+                            <div class="radio-group">
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="-9" required>
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="-7">
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="-5">
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="-3">
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="1" checked>
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="3">
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="5">
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="7">
+                                <input type="radio" name="${prefix}_${pair[0].replace(/ /g,'_')}_${pair[1].replace(/ /g,'_')}" value="9">
+                            </div>
+                            <span class="side-label right-label">${pair[1]}</span>
                         </div>
-                        <span class="side-label">${pair[1]}</span>
+                        <div class="number-labels">
+                            <span>9</span><span>7</span><span>5</span><span>3</span><span style="color:var(--primary)">1</span><span>3</span><span>5</span><span>7</span><span>9</span>
+                        </div>
                     </div>
                 `;
                 container.appendChild(row);
@@ -146,14 +168,13 @@
         }
 
         createRows(surveyData.ana, 'ana-kriterler-container', 'ANA');
-        createRows(surveyData.maliyet, 'maliyet-alt-container', 'MALİYET');
-        createRows(surveyData.verimlilik, 'verimlilik-alt-container', 'VERIM');
-        createRows(surveyData.esneklik, 'esneklik-alt-container', 'ESNEK');
-        createRows(surveyData.risk, 'risk-alt-container', 'RISK');
-        createRows(surveyData.alan, 'alan-alt-container', 'ALAN');
-        createRows(surveyData.yonetim, 'yonetilebilirlik-alt-container', 'YONETIM');
+        createRows(surveyData.maliyet, 'maliyet-alt-container', 'MAL');
+        createRows(surveyData.verimlilik, 'verimlilik-alt-container', 'VER');
+        createRows(surveyData.esneklik, 'esneklik-alt-container', 'ESN');
+        createRows(surveyData.risk, 'risk-alt-container', 'RSK');
+        createRows(surveyData.alan, 'alan-alt-container', 'ALN');
+        createRows(surveyData.yonetim, 'yonetilebilirlik-alt-container', 'YNT');
 
-        // Loader and Form logic
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             loader.style.opacity = '0';
@@ -177,18 +198,11 @@
                 document.getElementById('successMessage').style.display = 'block';
                 window.scrollTo(0,0);
             } else {
-                alert('Hata oluştu, lütfen tekrar deneyin.');
+                alert('Gönderim hatası. Lütfen internetinizi kontrol edip tekrar deneyin.');
                 btn.disabled = false;
                 btn.innerText = 'Anketi Tamamla ve Gönder';
             }
         };
     </script>
-    <style>
-        /* CSS buraya eklenmiştir, style.css dosyasını da kullanabilirsin */
-        .sub-group-title { font-size: 0.95rem; color: #1e293b; margin: 20px 0 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
-        .radio-group { display: flex; gap: 15px; }
-        .ahp-scale { display: flex; justify-content: space-between; align-items: center; }
-        .side-label { font-size: 0.75rem; font-weight: 600; width: 100px; text-align: center; }
-    </style>
 </body>
 </html>
