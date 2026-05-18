@@ -8,14 +8,14 @@
     <style>
         :root { --primary: #2563eb; --border: #e2e8f0; --text: #1e293b; --light-blue: #eff6ff; }
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { width: 100%; max-width: 700px; }
+        .container { width: 100%; max-width: 750px; }
         header { text-align: center; margin-bottom: 30px; }
         h1 { font-size: 1.5rem; color: var(--text); margin-bottom: 5px; }
         .divider { width: 40px; height: 4px; background: var(--primary); margin: 15px auto; border-radius: 2px; }
         
         .intro-desc { background: #fff; padding: 20px; border-radius: 12px; border-left: 5px solid var(--primary); margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .kriter-bilgi { background: #f1f5f9; padding: 15px; border-radius: 10px; margin-bottom: 25px; font-size: 0.8rem; border: 1px dashed #cbd5e1; }
-        .kriter-bilgi strong { color: var(--primary); display: block; margin-bottom: 8px; }
+        .kriter-bilgi strong { color: var(--primary); display: block; margin-bottom: 8px; font-size: 0.85rem; }
         .kriter-bilgi ul { padding-left: 18px; margin: 0; }
         .kriter-bilgi li { margin-bottom: 6px; color: #334155; line-height: 1.4; }
         
@@ -26,11 +26,14 @@
         .input-group label { font-size: 0.8rem; font-weight: 600; margin-bottom: 5px; }
         input, select, textarea { padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; }
 
-        .comparison-card { background: #fff; padding: 20px 8px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .ahp-table { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 5px; }
-        .side-label { width: 24%; font-size: 0.7rem; font-weight: 700; color: var(--text); line-height: 1.2; text-align: left; }
+        .comparison-card { background: #fff; padding: 22px 10px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .ahp-table { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px; }
+        
+        /* Genişliği yazılar sığsın diye hafif artırdık */
+        .side-label { width: 28%; font-size: 0.72rem; font-weight: 700; color: var(--text); line-height: 1.3; text-align: left; }
         .right-l { text-align: right; }
-        .middle-box { width: 50%; display: flex; flex-direction: column; align-items: center; }
+        
+        .middle-box { width: 42%; display: flex; flex-direction: column; align-items: center; }
         .num-row { display: flex; justify-content: space-between; width: 100%; margin-bottom: 8px; }
         .num-row span { width: 11%; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-align: center; transition: 0.3s; }
         .radio-row { display: flex; justify-content: space-between; width: 100%; }
@@ -47,7 +50,11 @@
         .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        @media (max-width: 600px) { .row { flex-direction: column; } .side-label { font-size: 0.65rem; } }
+        @media (max-width: 600px) { 
+            .row { flex-direction: column; } 
+            .side-label { width: 30%; font-size: 0.65rem; } 
+            .middle-box { width: 40%; }
+        }
     </style>
 </head>
 <body>
@@ -63,18 +70,18 @@
 
         <div class="intro-desc">
             <h3>Puanlama Rehberi</h3>
-            <p>Hangi kriter daha öncelikli ise o tarafa doğru seçim yapınız. Seçtiğiniz değer <strong>mavi</strong> renge dönecektir. 1: Eşit önemi ifade eder.</p>
+            <p>Kriter çiftlerini önem derecesine göre kıyaslayınız. Seçtiğiniz değer <strong>mavi</strong> renge dönecektir. Ortadaki "1" eşit önemi ifade eder.</p>
         </div>
 
         <div class="kriter-bilgi">
-            <strong>Alt Kriter Tanımları:</strong>
+            <strong>Ana Kriter Tanımları:</strong>
             <ul>
-                <li><strong>Genişleme:</strong> Tesisin gelecekteki kapasite artışlarına ve yeni makine eklemelerine fiziksel uygunluğu.</li>
-                <li><strong>Hat Değişimi:</strong> Üretim hattındaki makinelerin yerini değiştirme veya yeni ürün gruplarına geçiş hızı.</li>
-                <li><strong>Koordinasyon:</strong> Departmanlar arası iş akışının kopmadan ve karmaşa yaşanmadan yönetilebilmesi.</li>
-                <li><strong>Arıza Etkisi:</strong> Yerleşimden kaynaklı bir arızanın tüm üretimi durdurma veya yavaşlatma riski.</li>
-                <li><strong>Depolama:</strong> Hammadde ve mamul stok alanlarının üretim alanıyla olan optimize mesafesi.</li>
-                <li><strong>Bakım:</strong> Makinelerin etrafında teknik servis ve bakım için bırakılan alanın yeterliliği.</li>
+                <li><strong>Maliyet Faktörü:</strong> Tesisin kurulum (altyapı/makine), operasyonel işletme ve malzeme taşıma aşamalarındaki finansal giderler.</li>
+                <li><strong>Verimlilik Faktörü:</strong> Üretim hızının maksimize edilmesi, darboğaz/bekleme sürelerinin en aza indirilmesi ve genel kapasite kullanım oranı.</li>
+                <li><strong>Yönetilebilirlik Faktörü:</strong> Saha kontrol kolaylığı, departmanlar arası koordinasyon konforu ve bakım-onarım yönetim rahatlığı.</li>
+                <li><strong>Esneklik Faktörü:</strong> Ürün çeşitliliğine, talep değişimlerine ve hat revizyonlarına hızlı uyum yeteneği.</li>
+                <li><strong>Risk & Güvenlik Faktörü:</strong> İş kazası riskleri, gıda güvenliği kriterleri ve olası arızaların hat duruşlarına olan etkisi.</li>
+                <li><strong>Alan Kullanımı Faktörü:</strong> Mevcut kapalı alan verimliliği, depolama alanları entegrasyonu ve gelecekteki genişleme imkanları.</li>
             </ul>
         </div>
 
@@ -92,24 +99,38 @@
             </section>
 
             <section class="form-section">
-                <h2 class="section-title">Değerlendirme</h2>
+                <h2 class="section-title">Değerlendirme Bölümü</h2>
+                
+                <div class="sub-header">1. Ana Kriterler</div>
                 <div id="ana-group"></div>
-                <div class="sub-header">Maliyet Grubu</div> <div id="mal-group"></div>
-                <div class="sub-header">Verimlilik Grubu</div> <div id="ver-group"></div>
-                <div class="sub-header">Esneklik Grubu</div> <div id="esn-group"></div>
-                <div class="sub-header">Risk Grubu</div> <div id="rsk-group"></div>
-                <div class="sub-header">Alan Grubu</div> <div id="aln-group"></div>
-                <div class="sub-header">Yönetim Grubu</div> <div id="ynt-group"></div>
+                
+                <div class="sub-header">2.1. Maliyet Alt Kriterleri</div> 
+                <div id="mal-group"></div>
+                
+                <div class="sub-header">2.2. Verimlilik Alt Kriterleri</div> 
+                <div id="ver-group"></div>
+                
+                <div class="sub-header">2.3. Esneklik Alt Kriterleri</div> 
+                <div id="esn-group"></div>
+                
+                <div class="sub-header">2.4. Risk & Güvenlik Alt Kriterleri</div> 
+                <div id="rsk-group"></div>
+                
+                <div class="sub-header">2.5. Alan Kullanımı Alt Kriterleri</div> 
+                <div id="aln-group"></div>
+                
+                <div class="sub-header">2.6. Yönetilebilirlik Alt Kriterleri</div> 
+                <div id="ynt-group"></div>
             </section>
 
             <section class="form-section">
                 <h2 class="section-title">Genel Görüşler</h2>
                 <div class="input-group">
-                    <label>Mevcut yerleşimde en büyük sorun nedir?</label>
+                    <label>Mevcut yerleşimde karşılaştığınız en büyük sorun/darboğaz nedir?</label>
                     <textarea name="Sorun" rows="2" placeholder="Cevabınız..."></textarea>
                 </div>
                 <div class="input-group">
-                    <label>Yerleşim planı iyileştirilirse en büyük kazanç ne olur?</label>
+                    <label>Yerleşim planı optimize edilirse işletme için en büyük kazanım ne olur?</label>
                     <textarea name="Kazanc" rows="2" placeholder="Cevabınız..."></textarea>
                 </div>
             </section>
@@ -119,14 +140,55 @@
     </div>
 
     <script>
+        // İsimleri katılımcıların en net anlayacağı akademik ve açıklayıcı formatla güncelledik
         const pairs = {
-            ana: [["Maliyet", "Verim"], ["Maliyet", "Esneklik"], ["Maliyet", "Risk"], ["Maliyet", "Alan"], ["Maliyet", "Yönetim"], ["Verim", "Esneklik"], ["Verim", "Risk"], ["Verim", "Alan"], ["Verim", "Yönetim"], ["Esneklik", "Risk"], ["Esneklik", "Alan"], ["Esneklik", "Yönetim"], ["Risk", "Alan"], ["Risk", "Yönetim"], ["Alan", "Yönetim"]],
-            mal: [["Taşıma", "Kurulum"], ["Taşıma", "İşletme"], ["Kurulum", "İşletme"]],
-            ver: [["Hız", "Bekleme"], ["Hız", "Kapasite"], ["Bekleme", "Kapasite"]],
-            esn: [["Çeşit", "Talep"], ["Çeşit", "Hat"], ["Talep", "Hat"]],
-            rsk: [["Kaza", "Arıza"], ["Kaza", "Gıda"], ["Arıza", "Gıda"]],
-            aln: [["Verim", "Depo"], ["Verim", "Genişleme"], ["Depo", "Genişleme"]],
-            ynt: [["Kontrol", "Koord"], ["Kontrol", "Bakım"], ["Koord", "Bakım"]]
+            ana: [
+                ["Maliyet Faktörü", "Verimlilik Faktörü"], 
+                ["Maliyet Faktörü", "Esneklik Yeteneği"], 
+                ["Maliyet Faktörü", "Risk & Güvenlik"], 
+                ["Maliyet Faktörü", "Alan Kullanımı"], 
+                ["Maliyet Faktörü", "Yönetilebilirlik"], 
+                ["Verimlilik Faktörü", "Esneklik Yeteneği"], 
+                ["Verimlilik Faktörü", "Risk & Güvenlik"], 
+                ["Verimlilik Faktörü", "Alan Kullanımı"], 
+                ["Verimlilik Faktörü", "Yönetilebilirlik"], 
+                ["Esneklik Yeteneği", "Risk & Güvenlik"], 
+                ["Esneklik Yeteneği", "Alan Kullanımı"], 
+                ["Esneklik Yeteneği", "Yönetilebilirlik"], 
+                ["Risk & Güvenlik", "Alan Kullanımı"], 
+                ["Risk & Güvenlik", "Yönetilebilirlik"], 
+                ["Alan Kullanımı", "Yönetilebilirlik"]
+            ],
+            mal: [
+                ["Malzeme Taşıma Maliyeti", "Kurulum/Yatırım Maliyeti"], 
+                ["Malzeme Taşıma Maliyeti", "İşletme/Operasyon Maliyeti"], 
+                ["Kurulum/Yatırım Maliyeti", "İşletme/Operasyon Maliyeti"]
+            ],
+            ver: [
+                ["Üretim/Akış Hızı", "Bekleme Sürelerinin Azaltılması"], 
+                ["Üretim/Akış Hızı", "Kapasite Kullanım Oranı"], 
+                ["Bekleme Sürelerinin Azaltılması", "Kapasite Kullanım Oranı"]
+            ],
+            esn: [
+                ["Ürün Çeşitliliğine Uyum", "Talep Değişimine Uyum"], 
+                ["Ürün Çeşitliliğine Uyum", "Hat Değişim Kolaylığı"], 
+                ["Talep Değişimine Uyum", "Hat Değişim Kolaylığı"]
+            ],
+            rsk: [
+                ["İş Kazası Riski", "Arıza Durumunda Üretim Etkisi"], 
+                ["İş Kazası Riski", "Gıda Güvenliği Riski"], 
+                ["Arıza Durumunda Üretim Etkisi", "Gıda Güvenliği Riski"]
+            ],
+            aln: [
+                ["Alan Verimliliği (M²)", "Depolama Alanı Kullanımı"], 
+                ["Alan Verimliliği (M²)", "Gelecekte Genişleme İmkanı"], 
+                ["Depolama Alanı Kullanımı", "Gelecekte Genişleme İmkanı"]
+            ],
+            ynt: [
+                ["Saha Kontrol Kolaylığı", "Bölümler Arası Koordinasyon"], 
+                ["Saha Kontrol Kolaylığı", "Bakım Yönetimi Kolaylığı"], 
+                ["Bölümler Arası Koordinasyon", "Bakım Yönetimi Kolaylığı"]
+            ]
         };
 
         function render(list, targetId, prefix) {
@@ -145,7 +207,7 @@
                             <div class="radio-row">
                                 ${[-9,-7,-5,-3,1,3,5,7,9].map((val, i) => `
                                     <label>
-                                        <input type="radio" name="${prefix}_${p[0]}_${p[1]}" value="${val}" 
+                                        <input type="radio" name="${prefix}_${p[0].replace(/[^a-zA-Z0-9]/g, '_')}_${p[1].replace(/[^a-zA-Z0-9]/g, '_')}" value="${val}" 
                                         ${val === 1 ? 'checked' : ''} 
                                         onclick="updateColor(this, 'nums_${uniqueId}', ${i})">
                                     </label>
@@ -172,8 +234,8 @@
             const btn = document.getElementById('submitBtn'); btn.disabled = true; btn.innerText = 'Gönderiliyor...';
             try {
                 const res = await fetch(this.action, { method: 'POST', body: new FormData(this), headers: { 'Accept': 'application/json' } });
-                if (res.ok) { this.style.display = 'none'; alert('Analiz Başarıyla Gönderildi!'); window.scrollTo(0,0); }
-            } catch (err) { alert('Hata oluştu, tekrar deneyin.'); btn.disabled = false; btn.innerText = 'Analizi Tamamla'; }
+                if (res.ok) { this.style.display = 'none'; alert('Değerlendirmeniz Başarıyla Gönderildi!'); window.scrollTo(0,0); }
+            } catch (err) { alert('Bağlantı hatası oluştu, tekrar deneyin.'); btn.disabled = false; btn.innerText = 'Analizi Tamamla'; }
         };
 
         window.onload = () => {
